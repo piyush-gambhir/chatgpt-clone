@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import CustomIcon from "./custom-icons";
 
+import { signOut } from "next-auth/react";
 type Props = {
   userName: string;
   userAvatar: string;
@@ -14,7 +15,7 @@ export default function SidebarUserButton({ userName, userAvatar }: Props) {
   return (
     <div className="relative ">
       {isDropdownOpen && (
-        <div className="absolute top-[-320%] flex flex-col w-full pt-1 pb-1.5 bg-white dark:bg-[#202123] rounded-lg border dark:border-[#40414f] shadow-md text-sm font-semibold">
+        <div className="absolute top-[-310%] flex flex-col w-full pt-1 pb-1.5 bg-white dark:bg-[#202123] rounded-lg border dark:border-[#40414f] shadow-md text-sm font-semibold">
           <div className="flex flex-col border-b border-white/10 dark:border-black/20 ">
             <div className="flex flex-row gap-3 items-center  min-h-[44px] px-3 py-1 dark:hover:bg-[#343541] transition-colors">
               <CustomIcon iconName="CustomIntructions" className="w-4 h-4" />
@@ -25,7 +26,10 @@ export default function SidebarUserButton({ userName, userAvatar }: Props) {
               <div className="">Settings</div>
             </div>
           </div>
-          <button className="flex flex-row gap-3 items-center  min-h-[44px] px-3 py-1 dark:hover:bg-[#343541] transition-colors">
+          <button
+            onClick={() => signOut()}
+            className="flex flex-row gap-3 items-center  min-h-[44px] px-3 py-1 dark:hover:bg-[#343541] transition-colors"
+          >
             <CustomIcon iconName="Logout" className="w-4 h-4" />
             <div className="">Logout</div>
           </button>

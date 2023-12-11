@@ -33,11 +33,13 @@ export default async function RootLayout({
         )}
       >
         <SessionProvider session={session}>
-          {session && (
+          {session ? (
             <div className="w-full h-full flex flex-row">
               <Sidebar />
               {children}
             </div>
+          ) : (
+            <div className="h-full w-full">{children}</div>
           )}
         </SessionProvider>
       </body>

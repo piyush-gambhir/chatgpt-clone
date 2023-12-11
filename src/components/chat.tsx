@@ -2,7 +2,9 @@ import getUser from "@utils/getUser";
 
 import ChatMessage from "@components/chat-message";
 
-type Props = {};
+type Props = {
+  chatId: string;
+};
 
 const chat = [
   {
@@ -42,7 +44,7 @@ const chat = [
   },
 ];
 
-export default async function Chat({}: Props) {
+export default async function Chat({ chatId }: Props) {
   const user = await getUser();
 
   return (

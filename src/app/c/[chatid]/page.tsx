@@ -1,12 +1,13 @@
 import { redirect } from "next/navigation";
-
 import getUser from "@utils/getUser";
 
 import ChatHeader from "@components/chat-header";
 import Chat from "@components/chat";
 import ChatInputBox from "@components/chat-input-box";
 
-export default async function Page() {
+export default async function Page({ params }: { params: { chatid: string } }) {
+  const chatId = params.chatid;
+
   const user = await getUser();
   if (!user) {
     redirect("/auth/login");
