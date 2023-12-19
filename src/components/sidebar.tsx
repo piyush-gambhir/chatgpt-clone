@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import getUser from "@utils/getUser";
+import getUser from "@/lib/utils/getUser";
 
 import NewChatButton from "@components/new-chat-button";
 import SidebarChatSection from "@components/sidebar-chat-section";

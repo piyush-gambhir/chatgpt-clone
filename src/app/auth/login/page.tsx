@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-import getUser from "@utils/getUser";
+import getUser from "@/lib/utils/getUser";
 
 import OpenAILogo from "@components/openai-logo";
 

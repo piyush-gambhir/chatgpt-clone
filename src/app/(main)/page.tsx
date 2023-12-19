@@ -1,12 +1,11 @@
 import { redirect } from "next/navigation";
 
-import getUser from "@utils/getUser";
+import getUser from "@lib/utils/getUser";
 
 import ChatHeader from "@/components/chat-header";
 import OpenAIIconLogo from "@components/openai-icon-logo";
 import ChatInputBox from "@/components/chat-input-box";
 import ActionButton from "@components/action-button";
-import ModelDropdownButton from "@components/model-dropdown-button";
 
 export default async function Page() {
   const user = await getUser();

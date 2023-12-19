@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import CustomIcon from "./custom-icons";
 
@@ -10,6 +12,7 @@ type Props = {
 };
 
 export default function SidebarUserButton({ userName, userAvatar }: Props) {
+  const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -21,10 +24,14 @@ export default function SidebarUserButton({ userName, userAvatar }: Props) {
               <CustomIcon iconName="CustomIntructions" className="w-4 h-4" />
               <div className="">Custom intrusctions</div>
             </div>
-            <div className="flex flex-row gap-3 items-center min-h-[44px] px-3 py-1 dark:hover:bg-[#343541] transition-colors">
+            <Link
+              href={pathname + "#settings"}
+              onClick={() => setIsDropdownOpen(false)}
+              className="flex flex-row gap-3 items-center min-h-[44px] px-3 py-1 dark:hover:bg-[#343541] transition-colors"
+            >
               <CustomIcon iconName="Settings" className="w-4 h-4" />
               <div className="">Settings</div>
-            </div>
+            </Link>
           </div>
           <button
             onClick={() => signOut()}

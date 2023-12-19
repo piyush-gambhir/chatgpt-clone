@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import getUser from "@utils/getUser";
+import getUser from "@/lib/utils/getUser";
 
 import ChatHeader from "@components/chat-header";
 import Chat from "@components/chat";

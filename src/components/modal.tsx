@@ -7,6 +7,7 @@ type Props = {
   className?: string;
   modalHeading: string;
   showCloseButton?: boolean;
+  onClose?: () => void;
 };
 
 export default function Modal({
@@ -14,7 +15,10 @@ export default function Modal({
   className,
   modalHeading,
   showCloseButton = true,
+  onClose,
 }: Props) {
+
+  const modalRef = useRef<HTMLDivElement>(null);
   return (
     <div className="fixed inset-0 dark:bg-[#565869] dark:bg-opacity-70 z-10">
       <div className="fixed inset-0 flex items-center justify-center p-4 md:p-8">
@@ -25,7 +29,10 @@ export default function Modal({
                 {modalHeading}
               </div>
               {showCloseButton && (
-                <button className="text-gray-500 transition hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                <button
+                  onClick={onClose}
+                  className="text-gray-500 transition hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
                   <CustomIcon iconName="Close" className="w-5 h-5" />
                 </button>
               )}

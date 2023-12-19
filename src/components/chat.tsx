@@ -1,4 +1,4 @@
-import getUser from "@utils/getUser";
+import getUser from "@/lib/utils/getUser";
 
 import ChatMessage from "@components/chat-message";
 

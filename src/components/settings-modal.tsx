@@ -1,22 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import Link from "next/link";
 import cn from "clsx";
+import { useRouter } from "next/navigation";
+
+import useModal from "@lib/hooks/useModal";
 
 import Modal from "@components/modal";
 import CustomIcon from "@components/custom-icons";
 
 export default function SettingsModal() {
-  const themeOptions = ["System", "Dark", "Light"];
+  const currentURL = window.location.href;
+  const pathname = currentURL.split("#")[0];
+  const router = useRouter();
 
+  const { isOpen, openModal, closeModal } = useModal();
+
+  useEffect(() => {
+    if (currentURL.includes("#settings")) {
+      openModal();
+    }
+  }, [currentURL, openModal]);
+
+  const themeOptions = ["System", "Dark", "Light"];
   const [currentTab, setCurrentTab] = useState("general");
   const [currentTheme, setCurrentTheme] = useState("Dark");
   const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
   const [isChatHistoryEnabled, setIsChatHistoryEnabled] = useState(true);
 
-  return (
-    <Modal modalHeading="Settings" className="dark:bg-[#202123] md:max-w-[680px] w-full text-[#ECECF1]">
+  return isOpen ? (
+    <Modal
+      onClose={() => {
+        closeModal();
+        router.push(pathname);
+      }}
+      modalHeading="Settings"
+      className="dark:bg-[#202123] md:max-w-[680px] w-full text-[#ECECF1]"
+    >
       <div className="flex flex-row gap-6 w-full">
         <div className="text-sm font-semibold flex flex-col flex-shrink-0 gap-2 m-2 md:m-0 md:px-4 md:pl-6 md:pt-4 md:-ml-[8px] md:min-w-[180px] max-w-[200px] ">
           <button
@@ -134,7 +155,7 @@ export default function SettingsModal() {
             </div>
           </div>
         )}
-      </div> 
+      </div>
     </Modal>
-  );
+  ) : null;
 }
