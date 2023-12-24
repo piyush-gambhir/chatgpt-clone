@@ -1,5 +1,5 @@
-import Modal from "@components/modal";
-import Button from "@components/button";
+import Modal from "@/components/ui/modal";
+import Button from "@/components/ui/button";
 
 export default function ExportDataModal() {
   return (

@@ -3,7 +3,7 @@
 import cn from "clsx";
 import { useState } from "react";
 
-import CustomIcon from "@components/custom-icons";
+import CustomIcon from "@/components/ui/custom-icons";
 export default function ModelDropdownButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentModel, setCurrentModel] = useState("GPT-3.5");

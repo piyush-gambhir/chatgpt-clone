@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import CustomIcon from "@components/custom-icons";
+import CustomIcon from "@/components/ui/custom-icons";
 
 type Props = {};
 

@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import getUser from "@/lib/utils/getUser";
 
-import ChatHeader from "@components/chat-header";
-import Chat from "@components/chat";
-import ChatInputBox from "@components/chat-input-box";
+import ChatHeader from "@/components/chat/chat-header";
+import Chat from "@/components/chat/chat";
+import ChatInputBox from "@/components/chat/chat-input-box";
 
 export default async function Page({ params }: { params: { chatid: string } }) {
   const chatId = params.chatid;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import cn from "clsx";
 import { useState } from "react";
 
-import CustomIcon from "@components/custom-icons";
+import CustomIcon from "@/components/ui/custom-icons";
 
 type Props = {
   name: string;

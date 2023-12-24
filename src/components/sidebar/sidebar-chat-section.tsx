@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-import SidebarChatButton from "@components/sidebar-chat-button";
+import SidebarChatButton from "@/components/sidebar/sidebar-chat-button";
 const chatHistory = [
   {
     id: "550e8400-e29b-41d4-a716-446655440000",

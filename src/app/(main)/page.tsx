@@ -2,10 +2,10 @@ import { redirect } from "next/navigation";
 
 import getUser from "@lib/utils/getUser";
 
-import ChatHeader from "@/components/chat-header";
-import OpenAIIconLogo from "@components/openai-icon-logo";
-import ChatInputBox from "@/components/chat-input-box";
-import ActionButton from "@components/action-button";
+import ChatHeader from "@/components/chat/chat-header";
+import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
+import ChatInputBox from "@/components/chat/chat-input-box";
+import ActionButton from "@/components/ui/action-button";
 
 export default async function Page() {
   const user = await getUser();

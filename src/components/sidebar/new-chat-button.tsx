@@ -1,8 +1,8 @@
 import React from "react";
 
 type Props = {};
-import OpenAIIconLogo from "@components/openai-icon-logo";
-import CustomIcon from "@components/custom-icons";
+import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
+import CustomIcon from "@/components/ui/custom-icons";
 export default function NewChatButton({}: Props) {
   return (
     <button className="w-full rounded-lg text-[#ECECF1] hover:bg-[#202123] flex flex-row items-center justify-between group h-10 px-2">

@@ -1,6 +1,6 @@
 import getUser from "@/lib/utils/getUser";
 
-import ChatMessage from "@components/chat-message";
+import ChatMessage from "@/components/chat/chat-message";
 
 type Props = {
   chatId: string;

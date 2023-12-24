@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import getUser from "@/lib/utils/getUser";
 
-import OpenAILogo from "@components/openai-logo";
+import OpenAILogo from "@/components/ui/openai-logo";
 
 export default async function page() {
   const user = await getUser();

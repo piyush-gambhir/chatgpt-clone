@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import Modal from "@components/modal";
-import CustomButton from "@components/button";
-import CustomIcon from "./custom-icons";
+import Modal from "@/components/ui/modal";
+import CustomButton from "@/components/ui/button";
+import CustomIcon from "../ui/custom-icons";
 
 export default function SharedLinksModal() {
   const sharedLinks = [

@@ -11,7 +11,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-import SessionProvider from "@components/SessionProvider";
+import SessionProvider from "@/components/providers/session-provider";
+import ClientThemeProvider from "@/components/providers/client-theme-provider";
 
 export default async function RootLayout({
   children,
@@ -22,7 +23,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cn("h-screen w-screen", inter.className)}>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          <ClientThemeProvider>{children}</ClientThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

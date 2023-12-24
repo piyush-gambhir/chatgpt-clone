@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import getUser from "@/lib/utils/getUser";
 
-import NewChatButton from "@components/new-chat-button";
-import SidebarChatSection from "@components/sidebar-chat-section";
-import CustomIcon from "@components/custom-icons";
+import NewChatButton from "@/components/sidebar/new-chat-button";
+import SidebarChatSection from "@/components/sidebar/sidebar-chat-section";
+import CustomIcon from "@/components/ui/custom-icons";
 import SidebarUserButton from "./sidebar-user-button";
 
 export default async function Sidebar() {

@@ -1,13 +1,16 @@
 import cn from "clsx";
+import { useRef } from "react";
 
-import CustomIcon from "@components/custom-icons";
+import { useClickOutside } from "@lib/hooks/use-click-outside";
+
+import CustomIcon from "@components/ui/custom-icons";
 
 type Props = {
   children: React.ReactNode;
   className?: string;
   modalHeading: string;
   showCloseButton?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 };
 
 export default function Modal({
@@ -18,14 +21,23 @@ export default function Modal({
   onClose,
 }: Props) {
 
-  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  const modalRef = useRef(null);
+  useClickOutside({
+    ref: modalRef,
+    handler: () => handleClose(),
+  });
   return (
-    <div className="fixed inset-0 dark:bg-[#565869] dark:bg-opacity-70 z-10">
+    <div className="fixed inset-0  bg-black dark:bg-[#565869] bg-opacity-50 dark:bg-opacity-70 z-10">
       <div className="fixed inset-0 flex items-center justify-center p-4 md:p-8">
-        <div className={cn(className, "bg-white rounded-xl")} role="dialog">
+        <div ref={modalRef} className={cn(className, "bg-white rounded-xl")}>
           <div className="w-full flex flex-col">
             <div className="px-4 pb-4 pt-5 sm:p-6 flex items-center justify-between border-b border-black/10 dark:border-white/10">
-              <div className="text-lg font-medium leading-6">
+              <div className="text-lg font-semibold leading-6">
                 {modalHeading}
               </div>
               {showCloseButton && (
