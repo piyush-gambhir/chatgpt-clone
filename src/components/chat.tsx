@@ -1,9 +1,9 @@
-import getUser from "@/lib/utils/getUser";
+import ChatMessage from "@components/chat-message";
 
-import ChatMessage from "@/components/chat/chat-message";
+import getUser from "@lib/utils/get-user";
 
 type Props = {
-  chatId: string;
+  conversationId: string;
 };
 
 const chat = [
@@ -44,24 +44,24 @@ const chat = [
   },
 ];
 
-export default async function Chat({ chatId }: Props) {
+export default async function Chat({ conversationId }: Props) {
   const user = await getUser();
-
+  
   return (
     <div className="flex-1 overflow-y-auto overflow-x-hidden chat-scrollbar ">
       {chat.map((chat) => (
         <div key={chat.messageTimestamp}>
           <ChatMessage
             user={{
-              name: "Piyush Gambhir",
-              avatar: "/images/avatars/1.jpg",
+              name: user.name,
+              avatar: user.avatar,
             }}
             message={chat.prompt}
           />
           <ChatMessage
             user={{
               name: "ChatGPT",
-              avatar: "/images/avatars/1.jpg",
+              avatar: "/images/avatars/chatgpt-avatar.jpg",
             }}
             message={chat.response}
           />

@@ -6,24 +6,22 @@ import { useState } from "react";
 import CustomIcon from "@/components/ui/custom-icons";
 
 type Props = {
-  name: string;
-  link: string;
+  id: string;
+  title: string;
   active?: boolean;
 };
 
-export default function SidebarChatButton({ name, link, active }: Props) {
+export default function SidebarChatButton({ id, title, active }: Props) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   return (
-    <div className="reltive">
+    <Link href={`/c/${id}`} className="reltive">
       <div
         className={cn(
           "flex flex-row justify-between group hover:cursor-pointer rounded-lg p-2 text-[#ECECF1] hover:bg-[#202123]",
           active ? "bg-[#202123]" : ""
         )}
       >
-        {/* <Link href={link} className="flex items-center gap-2"> */}
-        <div className="grow overflow-hidden whitespace-nowrap">{name}</div>
-        {/* </Link> */}
+        <div className="grow overflow-hidden whitespace-nowrap">{title}</div>
         {active && (
           <button
             onClick={() => {
@@ -54,6 +52,6 @@ export default function SidebarChatButton({ name, link, active }: Props) {
           </button>
         </div>
       )}
-    </div>
+    </Link>
   );
 }

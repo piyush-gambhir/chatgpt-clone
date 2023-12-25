@@ -1,12 +1,17 @@
-import Modal from "@/components/ui/modal";
-import Button from "@/components/ui/button";
+import Modal from "@/components/modals/modal";
+import Button from "@/components/sidebar/settings-modal-button";
 
-export default function ExportDataModal() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function ExportDataModal({ onClose }: Props) {
   return (
     <Modal
       modalHeading="Request data export - are you sure?"
       className="dark:bg-[#202123] md:max-w-md w-full"
       showCloseButton={false}
+      onClose={() => onClose()}
     >
       <div className="p-4 md:p-6 ">
         <ul className="text-sm my-3 flex list-disc flex-col gap-1 pl-3  ">
@@ -26,11 +31,12 @@ export default function ExportDataModal() {
         </ul>
         <div>To proceed, click &ldquo;Confirm export&ldquo; below.</div>
         <div className="flex flex-row justify-end mt-4 gap-3">
-          <Button buttonText="Cancel" className="" />
-          <Button
-            buttonText="Confirm export"
-            className="bg-[#10A37F] hover:bg-opacity-80"
-          />
+          <Button onClick={() => onClose()} className="">
+            Cancel
+          </Button>
+          <Button className="text-white dark:text-white bg-[#10A37F] dark:bg-[#10A37F] dark:hover:bg-opacity-80">
+            Confirm export
+          </Button>
         </div>
       </div>
     </Modal>

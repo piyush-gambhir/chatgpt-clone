@@ -20,7 +20,7 @@ export default function ChatInputBox({}: Props) {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative bg-transparent border-[0.5px] dark:border-[#555768] flex w-full items-center rounded-[1rem]"
+      className="relative bg-transparent border-[0.5px] border-black/20 dark:border-[#555768] flex w-full items-center rounded-[1rem]"
     >
       <input
         type="text"
@@ -34,7 +34,7 @@ export default function ChatInputBox({}: Props) {
       <button
         type="submit"
         disabled={isDisabled}
-        className="absolute right-2 p-0.5 dark:bg-white dark:disabled:bg-[#494a54] disabled:bg-black dark:hover:bg-[#202123] dark:disabled:hover:bg-transparent dark:text-black dark:disabled:text-[#2f303a] border border-black rounded-lg dark:border-white dark:disabled:border-[#494a54] transition-colors"
+        className="absolute right-2 p-0.5 text-white disabled:text-white dark:text-black dark:disabled:text-[#2f303a] disabled:bg-black/10 bg-black dark:bg-white dark:disabled:bg-[#494a54] disabled:bg-black dark:hover:bg-[#202123] dark:disabled:hover:bg-transparent  border disabled:border-transparent border-black rounded-lg dark:border-white dark:disabled:border-[#494a54] transition-colors"
       >
         <CustomIcon iconName="Arrow" className="w-6 h-6" />
       </button>

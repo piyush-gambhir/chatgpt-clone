@@ -3,7 +3,7 @@
 import cn from "clsx";
 import { useState } from "react";
 
-import CustomIcon from "@/components/ui/custom-icons";
+import CustomIcon from "@components/ui/custom-icons";
 export default function ModelDropdownButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentModel, setCurrentModel] = useState("GPT-3.5");
@@ -13,14 +13,14 @@ export default function ModelDropdownButton() {
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className={cn(
-          "group cursor-pointer gap-1 rounded-xl py-2 px-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-black/10",
-          isDropdownOpen && "bg-gray-50 dark:bg-black/20"
+          "group cursor-pointer gap-1 rounded-xl py-2 px-3 text-lg font-medium hover:bg-black/5 dark:hover:bg-black/10",
+          isDropdownOpen && "bg-black/5 dark:bg-black/20"
         )}
       >
         <div className="flex flex-row items-center gap-1">
           <div className="font-bold">
             ChatGPT{" "}
-            <span className="text-[#c5c5d2]">
+            <span className="text-[#666666] dark:text-[#c5c5d2]">
               {currentModel === "GPT-3.5" ? "3.5" : "4"}
             </span>
           </div>
@@ -32,7 +32,7 @@ export default function ModelDropdownButton() {
       {isDropdownOpen && (
         <div
           className={cn(
-            "w-[340px] absolute mt-2 bg-[#202123] flex flex-col overflow-hidden rounded-lg border border-gray-100 shadow-lg dark:border-[#555768]"
+            "w-[340px] absolute mt-2 bg-white dark:bg-[#202123] flex flex-col overflow-hidden rounded-lg border border-gray-100 shadow-lg dark:border-[#555768]"
           )}
         >
           <button
@@ -40,13 +40,13 @@ export default function ModelDropdownButton() {
               setCurrentModel("GPT-3.5");
               setIsDropdownOpen(false);
             }}
-            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between hover:bg-[#2b2c2e]"
+            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center hover:bg-black/5 dark:hover:bg-[#2b2c2e]"
           >
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 items-center">
               <div className="">
                 <CustomIcon
                   iconName="LightningBolt"
-                  className=" stroke-[1.5] h-[18px] w-[18px] "
+                  className="stroke-[1.5] h-[18px] w-[18px]"
                 />
               </div>
               <div className="flex flex-col text-sm items-start">
@@ -57,10 +57,14 @@ export default function ModelDropdownButton() {
               </div>
             </div>
             <div className="">
-              <CustomIcon
-                iconName="Checkmark"
-                className="group-hover:hidden stroke-[1.5] h-[18px] w-[18px] fill-none"
-              />
+              {currentModel === "GPT-3.5" ? (
+                <CustomIcon
+                  iconName="CircularCheckmark"
+                  className="stroke-[1.5] h-[18px] w-[18px] "
+                />
+              ) : (
+                <div className="w-[18px] h-[18px] rounded-full border-2 border-[#939393]"></div>
+              )}
             </div>
           </button>
           <div className="border-[0.5px] border-[#939393]"></div>
@@ -69,9 +73,9 @@ export default function ModelDropdownButton() {
               setCurrentModel("GPT-4");
               setIsDropdownOpen(false);
             }}
-            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between hover:bg-[#2b2c2e]"
+            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center hover:bg-black/5 dark:hover:bg-[#2b2c2e]"
           >
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 items-center">
               <div className="">
                 <CustomIcon
                   iconName="Star"
@@ -87,11 +91,13 @@ export default function ModelDropdownButton() {
               </div>
             </div>
             <div className="">
-              {currentModel === "GPT-4" && (
+              {currentModel === "GPT-4" ? (
                 <CustomIcon
-                  iconName="Checkmark"
-                  className="group-hover:hidden stroke-[1.5] h-[18px] w-[18px] fill-none"
+                  iconName="CircularCheckmark"
+                  className="stroke-[1.5] h-[18px] w-[18px] "
                 />
+              ) : (
+                <div className="w-[18px] h-[18px] rounded-full border-2 border-[#939393]"></div>
               )}
             </div>
           </button>

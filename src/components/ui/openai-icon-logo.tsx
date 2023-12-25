@@ -12,8 +12,7 @@ export default function OpenAIIconLogo({ className = "" }: Props) {
       viewBox="0 0 41 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      //   className="h-2/3 w-2/3"
-      role="img"
+      className={className}
     >
       <text x="-9999" y="-9999">
         ChatGPT

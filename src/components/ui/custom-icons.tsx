@@ -10,7 +10,7 @@ const Icons = {
   Arrow: Arrow,
   DropdownArrow: DropdownArrow,
   LightningBolt: LightningBolt,
-  Checkmark: Checkmark,
+  CircularCheckmark: CircularCheckmark,
   Star: Star,
   HorizontalDots: HorizontalDots,
   NewChat: NewChat,
@@ -51,6 +51,7 @@ function Close({ className }: Props) {
       height="20"
       width="20"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <line x1="18" y1="6" x2="6" y2="18"></line>
       <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -59,7 +60,13 @@ function Close({ className }: Props) {
 }
 function Arrow({ className }: Props) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+    >
       <path
         d="M7 11L12 6L17 11M12 18V7"
         stroke="currentColor"
@@ -109,18 +116,20 @@ function LightningBolt({ className }: Props) {
   );
 }
 
-function Checkmark({ className }: Props) {
+function CircularCheckmark({ className }: Props) {
   return (
     <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
       <path
-        d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM16.0755 7.93219C16.5272 8.25003 16.6356 8.87383 16.3178 9.32549L11.5678 16.0755C11.3931 16.3237 11.1152 16.4792 10.8123 16.4981C10.5093 16.517 10.2142 16.3973 10.0101 16.1727L7.51006 13.4227C7.13855 13.014 7.16867 12.3816 7.57733 12.0101C7.98598 11.6386 8.61843 11.6687 8.98994 12.0773L10.6504 13.9039L14.6822 8.17451C15 7.72284 15.6238 7.61436 16.0755 7.93219Z"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10ZM14.0755 5.93219C14.5272 6.25003 14.6356 6.87383 14.3178 7.32549L9.56781 14.0755C9.39314 14.3237 9.11519 14.4792 8.81226 14.4981C8.50934 14.517 8.21422 14.3973 8.01006 14.1727L5.51006 11.4227C5.13855 11.014 5.16867 10.3816 5.57733 10.0101C5.98598 9.63855 6.61843 9.66867 6.98994 10.0773L8.65042 11.9039L12.6822 6.17451C13 5.72284 13.6238 5.61436 14.0755 5.93219Z"
         fill="currentColor"
       ></path>
     </svg>
@@ -318,7 +327,7 @@ function CustomIntructions({ className }: Props) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className, "text-black dark:text-white")}
+      className={cn(className, "")}
     >
       <path
         d="M10.663 6.3872C10.8152 6.29068 11 6.40984 11 6.59007V8C11 8.55229 11.4477 9 12 9C12.5523 9 13 8.55229 13 8V6.59007C13 6.40984 13.1848 6.29068 13.337 6.3872C14.036 6.83047 14.5 7.61105 14.5 8.5C14.5 9.53284 13.8737 10.4194 12.9801 10.8006C12.9932 10.865 13 10.9317 13 11V13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13V11C11 10.9317 11.0068 10.865 11.0199 10.8006C10.1263 10.4194 9.5 9.53284 9.5 8.5C9.5 7.61105 9.96397 6.83047 10.663 6.3872Z"
@@ -340,7 +349,7 @@ function Logout({ className }: Props) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className, "text-black dark:text-white")}
+      className={cn(className, "")}
     >
       <path
         d="M11 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H11"

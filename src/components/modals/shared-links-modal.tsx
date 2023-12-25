@@ -1,10 +1,13 @@
 import Link from "next/link";
 
-import Modal from "@/components/ui/modal";
-import CustomButton from "@/components/ui/button";
-import CustomIcon from "../ui/custom-icons";
+import Modal from "@/components/modals/modal";
+import CustomIcon from "@components/ui/custom-icons";
 
-export default function SharedLinksModal() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function SharedLinksModal({ onClose }: Props) {
   const sharedLinks = [
     {
       name: "Tailwind CSS: Opacity Utility",
@@ -32,6 +35,8 @@ export default function SharedLinksModal() {
     <Modal
       modalHeading="Shared Links"
       className="dark:bg-[#202123] md:max-w-5xl w-full"
+      showCloseButton={true}
+      onClose={() => onClose()}
     >
       <div className="p-4 md:p-6 ">
         <div className="overflow-y-auto text-gray-600 dark:text-gray-300 text-sm max-h-[28rem]">
