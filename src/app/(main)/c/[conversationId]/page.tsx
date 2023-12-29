@@ -21,7 +21,7 @@ export default async function Page({
       <ChatHeader />
       <Chat conversationId={conversationId} />
       <div className="bg-white dark:bg-[#343541] lg:mx-auto lg:max-w-2xl xl:max-w-3xl w-full flex flex-col items-center">
-        <ChatInputBox />
+        <ChatInputBox conversationId={conversationId} />
         <div className="px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
           ChatGPT can make mistakes. Consider checking important information.
         </div>

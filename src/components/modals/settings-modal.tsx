@@ -6,14 +6,16 @@ import { useRouter, usePathname } from "next/navigation";
 import cn from "clsx";
 import { useTheme } from "next-themes";
 
-import Modal from "@/components/modals/modal";
+import Modal from "@components/modals/modal";
 import ExportDataModal from "@components/modals/export-data-modal";
 import SharedLinksModal from "@components/modals/shared-links-modal";
 import CustomIcon from "@components/ui/custom-icons";
-import Button from "@/components/sidebar/settings-modal-button";
+import Button from "@components/sidebar/settings-modal-button";
 
 import { useMounted } from "@lib/hooks/use-mounted";
 import { useClickOutside } from "@lib/hooks/use-click-outside";
+import deleteAllConversations from "@/lib/utils/delete-all-chats";
+import { on } from "events";
 
 type Props = {
   onClose: () => void;
@@ -149,7 +151,13 @@ export default function SettingsModal({ onClose }: Props) {
               </div>
               <div className="flex flex-row justify-between items-center pb-3 text-sm">
                 <div className="">Delete all chats</div>
-                <button className="py-2 px-3 font-medium text-white bg-[#D3191C] hover:bg-[#D3191C]/80 rounded-lg">
+                <button
+                  onClick={() => {
+                    deleteAllConversations();
+                    onClose();
+                  }}
+                  className="py-2 px-3 font-medium text-white bg-[#D3191C] hover:bg-[#D3191C]/80 rounded-lg"
+                >
                   Delete all
                 </button>
               </div>

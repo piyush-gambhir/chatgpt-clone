@@ -6,7 +6,6 @@ import CustomIcon from "@components/ui/custom-icons";
 import SidebarUserButton from "@components/sidebar/sidebar-user-button";
 
 export default async function Sidebar() {
-  const isPlusUser = true;
   const user = await getUser();
   return (
     <div className="h-full w-[260px] hidden md:flex flex-col px-3 pb-3.5 bg-black ">
@@ -21,7 +20,7 @@ export default async function Sidebar() {
         </div>
       </div>
       <div className="text-[#ECECF1] flex flex-col pt-2 empty:hidden border-white/20">
-        {!isPlusUser && (
+        {!user.isPlusUser && (
           <button className="flex min-h-[44px] py-1 items-center gap-3 rounded-lg px-2 text-sm hover:bg-[#202123]">
             <div className="flex w-full flex-row flex-wrap-reverse justify-between">
               <div className="flex items-center gap-2 ">

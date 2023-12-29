@@ -12,7 +12,6 @@ export default async function Page() {
   if (!user) {
     redirect("/auth/login");
   }
-  console.log(user);
   return (
     <main className="relative w-full h-full flex flex-col justify-between">
       <ChatHeader />

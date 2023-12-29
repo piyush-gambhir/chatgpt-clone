@@ -1,21 +1,61 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
-import CustomIcon from "@/components/ui/custom-icons";
+import CustomIcon from "@components/ui/custom-icons";
 
-type Props = {};
+import createNewConversation from "@lib/utils/create-new-conversation";
+import createNewQuery from "@lib/utils/create-new-query";
 
-export default function ChatInputBox({}: Props) {
-  const router = useRouter();
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    router.push("/c/1");
-  };
+import dialoGPT from "@lib/dialoGPT-medium";
 
+type Props = {
+  conversationId?: string;
+};
+
+export default function ChatInputBox({ conversationId }: Props) {
   const [prompt, setPrompt] = useState("");
   const [isDisabled, setIsDisabled] = useState(prompt.length === 0);
+
+  const router = useRouter();
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!conversationId) {
+      const conversation = await createNewConversation();
+      conversationId = conversation.id;
+      router.push(`/c/${conversation.id}`);
+    }
+
+    try {
+      await createNewQuery({
+        conversationId: conversationId,
+        data: prompt,
+        isUser: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      const response = await dialoGPT({
+        inputs: {
+          past_user_inputs: [],
+          generated_responses: [],
+          text: prompt,
+        },
+      });
+      await createNewQuery({
+        conversationId: conversationId,
+        data: response.generated_text,
+        isUser: false,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+    setPrompt("");
+    setIsDisabled(true);
+  };
 
   return (
     <form
