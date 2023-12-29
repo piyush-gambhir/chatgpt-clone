@@ -31,8 +31,15 @@ npm install
 3. Create a .env.local file in the root directory and add the following environment variables:
 
 ```
-OPENAI_API_KEY=
-DATABASE_URL=
+NEXTAUTH_URL = ''
+NEXTAUTH_SECRET = ''
+
+GITHUB_CLIENT_ID = ''
+GITHUB_CLIENT_SECRET = ''
+
+DATABASE_URL = ''
+
+OPENAI_API_KEY = ''
 ```
 
 4. Run the development server:
