@@ -40,9 +40,9 @@ export default function ModelDropdownButton() {
               setCurrentModel("GPT-3.5");
               setIsDropdownOpen(false);
             }}
-            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center hover:bg-black/5 dark:hover:bg-[#2b2c2e]"
+            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center rounded-md border-2 border-transparent hover:bg-black/5 dark:hover:bg-[#2b2c2e] hover:border-black dark:hover:border-[#2b2c2e] hover:dark:border-white"
           >
-            <div className="flex flex-row gap-2 items-center">
+            <div className="flex flex-row gap-2.5 items-center mr-2">
               <div className="">
                 <CustomIcon
                   iconName="LightningBolt"
@@ -67,15 +67,14 @@ export default function ModelDropdownButton() {
               )}
             </div>
           </button>
-          <div className="border-[0.5px] border-[#939393]"></div>
           <button
             onClick={() => {
               setCurrentModel("GPT-4");
               setIsDropdownOpen(false);
             }}
-            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center hover:bg-black/5 dark:hover:bg-[#2b2c2e]"
+            className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center rounded-md border-2 border-transparent hover:bg-black/5 dark:hover:bg-[#2b2c2e] hover:border-black dark:hover:border-[#2b2c2e] hover:dark:border-white"
           >
-            <div className="flex flex-row gap-2 items-center">
+            <div className="flex flex-row gap-2.5 items-center mr-2">
               <div className="">
                 <CustomIcon
                   iconName="Star"

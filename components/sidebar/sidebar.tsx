@@ -2,6 +2,7 @@ import NewChatButton from "@/components/sidebar/new-chat-button";
 import SidebarChatSection from "@/components/sidebar/sidebar-chat-section";
 import CustomIcon from "@/components/ui/custom-icons";
 import SidebarUserButton from "@/components/sidebar/sidebar-user-button";
+
 import { currentUser } from "@/lib/auth";
 
 export default async function Sidebar() {
@@ -20,7 +21,7 @@ export default async function Sidebar() {
         </div>
       </div>
       <div className="text-[#ECECF1] flex flex-col pt-2 empty:hidden border-white/20">
-        {!user.isPlusUser && (
+        {!user?.isPlusUser && (
           <button className="flex min-h-[44px] py-1 items-center gap-3 rounded-lg px-2 text-sm hover:bg-[#202123]">
             <div className="flex w-full flex-row flex-wrap-reverse justify-between">
               <div className="flex items-center gap-2 ">

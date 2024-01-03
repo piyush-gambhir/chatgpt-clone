@@ -14,7 +14,7 @@ import Button from "@/components/sidebar/settings-modal-button";
 
 import { useMounted } from "@/hooks/use-mounted";
 import { useClickOutside } from "@/hooks/use-click-outside";
-import deleteAllConversations from "@/utils/delete-all-chats";
+import { deleteUserConversations } from "@/data/user-conversations";
 import { on } from "events";
 
 type Props = {
@@ -153,7 +153,7 @@ export default function SettingsModal({ onClose }: Props) {
                 <div className="">Delete all chats</div>
                 <button
                   onClick={() => {
-                    deleteAllConversations();
+                    deleteUserConversations();
                     onClose();
                   }}
                   className="py-2 px-3 font-medium text-white bg-[#D3191C] hover:bg-[#D3191C]/80 rounded-lg"

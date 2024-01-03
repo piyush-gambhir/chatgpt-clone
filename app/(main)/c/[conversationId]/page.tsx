@@ -1,6 +1,3 @@
-import { redirect } from "next/navigation";
-import getUser from "@/utils/get-user";
-
 import ChatHeader from "@/components/chat-header";
 import Chat from "@/components/chat";
 import ChatInputBox from "@/components/chat-input-box";
@@ -11,10 +8,6 @@ export default async function Page({
   params: { conversationId: string };
 }) {
   const conversationId = params.conversationId;
-  const user = await getUser();
-  if (!user) {
-    redirect("/auth/login");
-  }
 
   return (
     <main className="h-full w-full flex flex-col overflow-hidden">

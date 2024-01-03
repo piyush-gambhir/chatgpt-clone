@@ -8,7 +8,7 @@ type Props = {
 
 export default function ActionButton({ title, description, onClick }: Props) {
   return (
-    <div className="text-sm w-full border border-black/10 rounded-xl">
+    <div className="text-sm w-full border border-black/20 dark:border-[#555768] rounded-xl">
       <button className="group w-full whitespace-nowrap rounded-xl px-4 py-3 text-left text-gray-700 dark:text-gray-300 md:whitespace-normal">
         <div className="flex w-full gap-2 items-center justify-center">
           <div className="flex w-full items-center justify-between">
