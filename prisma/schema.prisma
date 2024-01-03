@@ -3,38 +3,78 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  email         String         @unique
-  name          String
-  avatar        String?
+  id            String         @id @default(cuid())
+  email         String?        @unique
+  name          String?
+  image        String?
   isPlusUser    Boolean        @default(false)
+  password      String?
+  emailVerified DateTime?
   conversations Conversation[]
+  accounts      Account[]
   createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
 }
 
 model Conversation {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(cuid())
   title      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   isArchived Boolean  @default(false)
   queries    Query[]
   User       User?    @relation(fields: [userId], references: [id])
-  userId     String?  @db.ObjectId
+  userId     String?
 }
 
 model Query {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  id             String        @id @default(cuid())
   isUser         Boolean
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   data           String
   Conversation   Conversation? @relation(fields: [conversationId], references: [id])
-  conversationId String?       @db.ObjectId
+  conversationId String?
 }
