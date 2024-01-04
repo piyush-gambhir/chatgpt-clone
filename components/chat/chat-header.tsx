@@ -1,4 +1,4 @@
-import ModelDropdownButton from "@/components/model-dropdown-button";
+import ModelDropdownButton from "@/components/chat/model-dropdown-button";
 
 export default function ChatHeader() {
   return (

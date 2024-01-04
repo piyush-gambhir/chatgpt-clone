@@ -5,8 +5,8 @@ import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
-import LoginInput from "@/components/ui/login-input";
-import SocialLoginButton from "@/components/social-login-button";
+import LoginInput from "@/components/auth/login-input";
+import SocialLoginButton from "@/components/auth/social-login-button";
 
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 

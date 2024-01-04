@@ -30,13 +30,13 @@ export default async function page() {
           <div className="items-center justify-center mt-5 w-full max-w-[440px] flex flex-row flex-wrap gap-4">
             <div className="w-full grid gap-x-3 gap-y-2 sm:grid-cols-2 sm:gap-y-0">
               <Link
-                href="/api/auth/signin"
+                href="/auth/login/signin"
                 className="w-full relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
               >
                 Login
               </Link>
               <Link
-                href="/api/auth/signin"
+                href="/auth/login/signup"
                 className="w-full relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
               >
                 Sign Up

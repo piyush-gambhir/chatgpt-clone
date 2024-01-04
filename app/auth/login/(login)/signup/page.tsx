@@ -3,8 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
-import LoginInput from "@/components/ui/login-input";
-import SocialLoginButton from "@/components/social-login-button";
+import LoginInput from "@/components/auth/login-input";
+import SocialLoginButton from "@/components/auth/social-login-button";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");

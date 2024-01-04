@@ -1,7 +1,7 @@
-import ChatHeader from "@/components/chat-header";
+import ChatHeader from "@/components/chat/chat-header";
 import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
-import ChatInputBox from "@/components/chat-input-box";
-import ActionButton from "@/components/action-button";
+import ChatInputBox from "@/components/chat/chat-input-box";
+import ActionButton from "@/components/chat/action-button";
 
 export default async function Page() {
   return (

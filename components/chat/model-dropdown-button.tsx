@@ -1,15 +1,24 @@
 "use client";
 
 import cn from "clsx";
-import { useState } from "react";
+import { useState, useRef } from "react";
+
+import { useClickOutside } from "@/hooks/use-click-outside";
 
 import CustomIcon from "@/components/ui/custom-icons";
 export default function ModelDropdownButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentModel, setCurrentModel] = useState("GPT-3.5");
 
+  const dropdownRef = useRef(null);
+
+  useClickOutside({
+    ref: dropdownRef,
+    handler: () => setIsDropdownOpen(false),
+  });
+
   return (
-    <div className="">
+    <div className="">  
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className={cn(
@@ -31,6 +40,7 @@ export default function ModelDropdownButton() {
       </button>
       {isDropdownOpen && (
         <div
+          ref={dropdownRef}
           className={cn(
             "w-[340px] absolute mt-2 bg-white dark:bg-[#202123] flex flex-col overflow-hidden rounded-lg border border-gray-100 shadow-lg dark:border-[#555768]"
           )}

@@ -1,4 +1,4 @@
-import ChatMessage from "@/components/chat-message";
+import ChatMessage from "@/components/chat/chat-message";
 
 import { getConversationQueries } from "@/data/conversation-queries";
 
