@@ -2,12 +2,12 @@
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 
-export const createUserConversation = async () => {
+export const createUserConversation = async (conversationTitle: string) => {
   const user = await currentUser();
 
   const conversation = await db.conversation.create({
     data: {
-      title: "New Conversation",
+      title: conversationTitle,
       userId: user?.id,
     },
   });

@@ -3,10 +3,13 @@ import SidebarChatSection from "@/components/sidebar/sidebar-chat-section";
 import CustomIcon from "@/components/ui/custom-icons";
 import SidebarUserButton from "@/components/sidebar/sidebar-user-button";
 
+import { getUserConversations } from "@/data/user-conversations";
+
 import { currentUser } from "@/lib/auth";
 
 export default async function Sidebar() {
   const user = await currentUser();
+  const conversations = await getUserConversations();
 
   return (
     <div className="h-full min-w-[260px] hidden md:flex flex-col px-3 pb-3.5 bg-black ">
@@ -17,7 +20,7 @@ export default async function Sidebar() {
           </div>
         </div>
         <div className="mt-5 ">
-          <SidebarChatSection />
+          <SidebarChatSection conversations={conversations} />
         </div>
       </div>
       <div className="text-[#ECECF1] flex flex-col pt-2 empty:hidden border-white/20">

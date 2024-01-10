@@ -1,31 +1,32 @@
 "use server";
 import { db } from "@/lib/db";
 
-export const createConversationQuery = async (
+export const createConversationMessage = async (
   conversationId: string,
   data: string,
   isUser: boolean
 ) => {
   try {
-    await db.query.create({
+    const message = await db.message.create({
       data: {
         conversationId: conversationId,
         data: data,
         isUser: isUser,
       },
     });
+    return message;
   } catch {
     return null;
   }
 };
 
-export const getConversationQueries = async (conversationId: string) => {
+export const getConversationMessages = async (conversationId: string) => {
   try {
-    const conversationQueries = await db.query.findMany({
+    const conversationMessages = await db.message.findMany({
       where: { conversationId: conversationId },
       orderBy: { updatedAt: "asc" },
     });
-    return conversationQueries;
+    return conversationMessages;
   } catch {
     return null;
   }

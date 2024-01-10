@@ -1,3 +1,4 @@
+import { update } from "@/auth";
 import * as z from "zod";
 
 export const NewPasswordSchema = z.object({
@@ -31,4 +32,19 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required",
   }),
+});
+
+export const PromptSchema = z.object({
+  prompt: z.string().min(1, {
+    message: "Prompt is required",
+  }),
+});
+
+export const MessageSchema = z.object({
+  id: z.string(),
+  isUser: z.boolean(),
+  data: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  conversationId: z.string(),
 });

@@ -154,6 +154,7 @@ export default function SettingsModal({ onClose }: Props) {
                 <button
                   onClick={() => {
                     deleteUserConversations();
+                    router.push("/");
                     onClose();
                   }}
                   className="py-2 px-3 font-medium text-white bg-[#D3191C] hover:bg-[#D3191C]/80 rounded-lg"

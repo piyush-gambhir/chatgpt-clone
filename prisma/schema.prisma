@@ -4,15 +4,15 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
   id            String         @id @default(cuid())
   email         String?        @unique
   name          String?
-  image        String?
+  image         String?
   isPlusUser    Boolean        @default(false)
   password      String?
   emailVerified DateTime?
@@ -59,19 +59,19 @@ model PasswordResetToken {
 }
 
 model Conversation {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   title      String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  isArchived Boolean  @default(false)
-  queries    Query[]
-  User       User?    @relation(fields: [userId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  isArchived Boolean   @default(false)
+  messages   Message[]
+  User       User?     @relation(fields: [userId], references: [id])
   userId     String?
 }
 
-model Query {
+model Message {
   id             String        @id @default(cuid())
-  isUser         Boolean
+  isUser         Boolean       @default(true)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   data           String

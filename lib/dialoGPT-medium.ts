@@ -10,6 +10,7 @@ export default async function dialoGPT(data: {
     {
       headers: {
         Authorization: "Bearer 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",
+        // Authorization: `Bearer ${process.env.HUGGINGFACE_TOKEN}`,
       },
       method: "POST",
       body: JSON.stringify(data),
