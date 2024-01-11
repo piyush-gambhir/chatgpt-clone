@@ -49,7 +49,7 @@ export default function ChatMessage({ isUser, data, error = false }: Props) {
             )}
           </div>
           <div className="flex flex-row min-h-4">
-            {!isUser ? (
+            {!error && !isUser ? (
               <div>
                 {isClipboardCopied ? (
                   <CustomIcon iconName="Tick" className="w-4 h-4" />

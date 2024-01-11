@@ -1,4 +1,4 @@
-import Chatting from "@/components/chat/chat";
+import Chat from "@/components/chat/chat";
 export default function Page({
   params,
 }: {
@@ -6,5 +6,5 @@ export default function Page({
 }) {
   const conversationId = params.conversationId;
 
-  return <Chatting conversationId={conversationId} />;
+  return <Chat conversationId={conversationId} />;
 }

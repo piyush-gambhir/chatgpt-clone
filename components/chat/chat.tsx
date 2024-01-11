@@ -16,27 +16,18 @@ import { Message } from "@/lib/types";
 
 type Props = {
   conversationId: string;
+  newChatPrompt: string;
 };
 
-export default function Chat({ conversationId }: Props) {
-  const [prompt, setPrompt] = useState("");
+export default function Chat({ conversationId, newChatPrompt }: Props) {
+  const [prompt, setPrompt] = useState(newChatPrompt || "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const fetchMessages = useCallback(async () => {
-    try {
-      const response = await getConversationMessages(conversationId);
-      setMessages((prev) => [...prev, ...response]);
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    }
-  }, [conversationId]);
+  const [isNewChat, setIsNewChat] = useState(newChatPrompt ? true : false);
+  console.log(conversationId);
 
-  useEffect(() => {
-    fetchMessages();
-  }, [fetchMessages]);
-
-  const onPromptSubmit = async () => {
+  const onPromptSubmit = useCallback(async () => {
     try {
       setPrompt("");
       const userMessage = await createConversationMessage(
@@ -87,7 +78,26 @@ export default function Chat({ conversationId }: Props) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [conversationId, messages, prompt]);
+
+  const fetchMessages = useCallback(async () => {
+    try {
+      if (isNewChat) {
+        onPromptSubmit();
+        setIsNewChat(false);
+      } else {
+        const response = await getConversationMessages(conversationId);
+        setMessages((prev) => [...prev, ...response]);
+      }
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
   return (
     <main className="h-full w-full flex flex-col px-6">
       <ChatHeader />

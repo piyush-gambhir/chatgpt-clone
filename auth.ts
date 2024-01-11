@@ -14,7 +14,7 @@ export const {
   update,
 } = NextAuth({
   pages: {
-    signIn: "/auth/login",
+    signIn: "/auth",
     error: "/auth/error",
   },
   events: {
