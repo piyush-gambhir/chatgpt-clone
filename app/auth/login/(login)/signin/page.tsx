@@ -1,24 +1,13 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 
 import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
 import LoginInput from "@/components/auth/login-input";
 import SocialLoginButton from "@/components/auth/social-login-button";
 
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-
 export default function SignIn() {
   const [email, setEmail] = useState("");
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
-  const onSocialButtonClick = (provider: "google" | "github") => {
-    signIn(provider, {
-      callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
-    });
-  };
 
   return (
     <div className="h-full flex flex-col justify-between items-center">
@@ -54,18 +43,8 @@ export default function SignIn() {
               <div className="h-[1px] w-full bg-[#c2c8d0]"></div>
             </div>
             <div className="mt-6 w-full flex flex-col gap-1">
-              <SocialLoginButton
-                onClick={onSocialButtonClick}
-                SocialName="Google"
-              />
-              <SocialLoginButton
-                onClick={onSocialButtonClick}
-                SocialName="Microsoft"
-              />
-              <SocialLoginButton
-                onClick={onSocialButtonClick}
-                SocialName="Apple"
-              />
+              <SocialLoginButton SocialName="Google" />
+              <SocialLoginButton SocialName="GitHub" />
             </div>
           </div>
         </div>

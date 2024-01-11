@@ -44,8 +44,7 @@ export default function SignUp() {
             </div>
             <div className="mt-6 w-full flex flex-col gap-1">
               <SocialLoginButton SocialName="Google" />
-              <SocialLoginButton SocialName="Microsoft" />
-              <SocialLoginButton SocialName="Apple" />
+              <SocialLoginButton SocialName="GitHub" />
             </div>
           </div>
         </div>
