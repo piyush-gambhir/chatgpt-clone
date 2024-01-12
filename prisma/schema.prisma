@@ -15,7 +15,6 @@ model User {
   image         String?
   isPlusUser    Boolean        @default(false)
   password      String?
-  emailVerified DateTime?
   conversations Conversation[]
   accounts      Account[]
   createdAt     DateTime       @default(now())

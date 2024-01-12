@@ -20,7 +20,7 @@ export default async function Sidebar() {
           </div>
         </div>
         <div className="mt-5 ">
-          <SidebarChatSection conversations={conversations} />
+          <SidebarChatSection conversations={conversations!} />
         </div>
       </div>
       <div className="text-[#ECECF1] flex flex-col pt-2 empty:hidden border-white/20">
@@ -36,7 +36,7 @@ export default async function Sidebar() {
             </div>
           </button>
         )}
-        <SidebarUserButton userName={user?.name} userAvatar={user?.image} />
+        <SidebarUserButton userName={user?.name!} userAvatar={user?.image!} />
       </div>
     </div>
   );

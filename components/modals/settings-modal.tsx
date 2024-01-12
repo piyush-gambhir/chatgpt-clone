@@ -15,7 +15,6 @@ import Button from "@/components/sidebar/settings-modal-button";
 import { useMounted } from "@/hooks/use-mounted";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { deleteUserConversations } from "@/data/user-conversations";
-import { on } from "events";
 
 type Props = {
   onClose: () => void;
@@ -36,45 +35,31 @@ export default function SettingsModal({ onClose }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (userTheme === "System") {
-      setTheme(
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-      );
-    }
-  }, [userTheme, setTheme]);
-
-  if (!useMounted) return null;
-
   const themeDropdownRef = useRef(null);
   useClickOutside({
     ref: themeDropdownRef,
     handler: () => setIsThemeDropdownOpen(false),
   });
 
-  if (isSharedLinksModalOpen) {
-    return (
-      <SharedLinksModal
-        onClose={() => {
-          setIsSharedLinksModalOpen(false);
-          setShowSettingsModal(true);
-        }}
-      />
-    );
-  }
+  if (!useMounted) return null;
 
-  if (isExportDataModalOpen) {
-    return (
-      <ExportDataModal
-        onClose={() => {
-          setIsExportDataModalOpen(false);
-          setShowSettingsModal(true);
-        }}
-      />
-    );
-  }
+  const sharedLinksModal = isSharedLinksModalOpen && (
+    <SharedLinksModal
+      onClose={() => {
+        setIsSharedLinksModalOpen(false);
+        setShowSettingsModal(true);
+      }}
+    />
+  );
+
+  const exportDataModal = isExportDataModalOpen && (
+    <ExportDataModal
+      onClose={() => {
+        setIsExportDataModalOpen(false);
+        setShowSettingsModal(true);
+      }}
+    />
+  );
 
   return (
     showSettingsModal && (
@@ -233,6 +218,8 @@ export default function SettingsModal({ onClose }: Props) {
             </div>
           )}
         </div>
+        {sharedLinksModal}
+        {exportDataModal}
       </Modal>
     )
   );

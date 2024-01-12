@@ -1,10 +1,15 @@
 import cn from "clsx";
+
 type Props = {
+  className?: string;
+};
+
+type CustomIconProps = {
   iconName: string;
   className?: string;
 };
 
-const Icons = {
+const Icons: Record<string, ({ className }: Props) => JSX.Element> = {
   Close: Close,
   Arrow: Arrow,
   DropdownArrow: DropdownArrow,
@@ -25,18 +30,12 @@ const Icons = {
   Tick: Tick,
 };
 
-type IconName = keyof typeof Icons;
-
-type CustomIconProps = Props & {
-  iconName: IconName;
-};
-
-export default function CustomIcon({
-  iconName,
-  className,
-}: Props): JSX.Element {
+export default function CustomIcon({ iconName, className }: CustomIconProps) {
   const Icon = Icons[iconName];
-
+  if (!Icon) {
+    console.error(`Invalid iconName: ${iconName}`);
+    return null;
+  }
   return <Icon className={className} />;
 }
 
@@ -408,5 +407,3 @@ function Tick({ className }: Props) {
     </svg>
   );
 }
-
-

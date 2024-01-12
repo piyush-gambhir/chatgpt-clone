@@ -16,7 +16,7 @@ import { Message } from "@/lib/types";
 
 type Props = {
   conversationId: string;
-  newChatPrompt: string;
+  newChatPrompt?: string;
 };
 
 export default function Chat({ conversationId, newChatPrompt }: Props) {
@@ -36,12 +36,12 @@ export default function Chat({ conversationId, newChatPrompt }: Props) {
         true
       );
       const message = {
-        id: userMessage.id,
-        isUser: true,
-        data: prompt,
-        createdAt: userMessage.createdAt,
-        updatedAt: userMessage.updatedAt,
-        conversationId: userMessage.conversationId,
+        id: userMessage?.id!,
+        isUser: true!,
+        data: prompt!,
+        createdAt: userMessage?.createdAt!,
+        updatedAt: userMessage?.updatedAt!,
+        conversationId: userMessage?.conversationId!,
       };
       setMessages((prev) => [...prev, message]);
       setLoading(true);
@@ -65,12 +65,12 @@ export default function Chat({ conversationId, newChatPrompt }: Props) {
         false
       );
       const modelMessage = {
-        id: modelResponseDatabase.id,
-        isUser: false,
-        data: modelResponse.generated_text,
-        createdAt: modelResponseDatabase.createdAt,
-        updatedAt: modelResponseDatabase.updatedAt,
-        conversationId: modelResponseDatabase.conversationId,
+        id: modelResponseDatabase?.id!,
+        isUser: false!,
+        data: modelResponse.generated_text!,
+        createdAt: modelResponseDatabase?.createdAt!,
+        updatedAt: modelResponseDatabase?.updatedAt!,
+        conversationId: modelResponseDatabase?.conversationId!,
       };
       setMessages((prev) => [...prev, modelMessage]);
     } catch (error) {
@@ -86,7 +86,9 @@ export default function Chat({ conversationId, newChatPrompt }: Props) {
         onPromptSubmit();
         setIsNewChat(false);
       } else {
-        const response = await getConversationMessages(conversationId);
+        const response = (await getConversationMessages(
+          conversationId
+        )) as Message[];
         setMessages((prev) => [...prev, ...response]);
       }
     } catch (error) {
