@@ -36,7 +36,10 @@ export default async function Sidebar() {
             </div>
           </button>
         )}
-        <SidebarUserButton userName={user?.name!} userAvatar={user?.image!} />
+        <SidebarUserButton
+          userName={user?.name!}
+          userAvatar={user?.image || "/images/default-user-image.webp"}
+        />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export default async function page() {
         </h1>
       </nav>
       <LoginScreenAnimatedText />
-      <div className="h-full w-full dark:bg-black md:col-span-2 px-5 md:px-6 py-8 flex flex-col items-center justify-center text-black dark:text-white ">
+      <div className="h-full w-full bg-white dark:bg-black md:col-span-2 px-5 md:px-6 py-8 flex flex-col items-center justify-center text-black dark:text-white ">
         <div className="my-auto w-full flex flex-col justify-center items-center">
           <h2 className="text-center text-[20px] leading-[1.2] md:text-[32px] md:leading-8 font-semibold">
             Get Started
