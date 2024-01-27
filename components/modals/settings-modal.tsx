@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import cn from "clsx";
@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
 import Modal from "@/components/modals/modal";
 import ExportDataModal from "@/components/modals/export-data-modal";
 import SharedLinksModal from "@/components/modals/shared-links-modal";
+import DeleteDataModal from "@/components/modals/delete-account-modal";
 import CustomIcon from "@/components/ui/custom-icons";
 import Button from "@/components/sidebar/settings-modal-button";
 
@@ -31,6 +32,8 @@ export default function SettingsModal({ onClose }: Props) {
   const [showSettingsModal, setShowSettingsModal] = useState(true);
   const [isSharedLinksModalOpen, setIsSharedLinksModalOpen] = useState(false);
   const [isExportDataModalOpen, setIsExportDataModalOpen] = useState(false);
+  const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] =
+    useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -43,26 +46,8 @@ export default function SettingsModal({ onClose }: Props) {
 
   if (!useMounted) return null;
 
-  const sharedLinksModal = isSharedLinksModalOpen && (
-    <SharedLinksModal
-      onClose={() => {
-        setIsSharedLinksModalOpen(false);
-        setShowSettingsModal(true);
-      }}
-    />
-  );
-
-  const exportDataModal = isExportDataModalOpen && (
-    <ExportDataModal
-      onClose={() => {
-        setIsExportDataModalOpen(false);
-        setShowSettingsModal(true);
-      }}
-    />
-  );
-
-  return (
-    showSettingsModal && (
+  if (showSettingsModal) {
+    return (
       <Modal
         onClose={onClose}
         modalHeading="Settings"
@@ -193,7 +178,6 @@ export default function SettingsModal({ onClose }: Props) {
                     setShowSettingsModal(false),
                       setIsSharedLinksModalOpen(true);
                   }}
-                  className=""
                 >
                   Manage
                 </Button>
@@ -211,16 +195,49 @@ export default function SettingsModal({ onClose }: Props) {
               </div>
               <div className="flex flex-row justify-between items-center pb-3 text-sm">
                 <div className="">Delete account</div>
-                <button className="py-2 px-3 font-medium text-[white] bg-[#D3191C] hover:bg-[#D3191C]/80  rounded-lg ">
+                <button
+                  onClick={() => {
+                    setShowSettingsModal(false),
+                      setIsDeleteAccountModalOpen(true);
+                  }}
+                  className="py-2 px-3 font-medium text-[white] bg-[#D3191C] hover:bg-[#D3191C]/80  rounded-lg "
+                >
                   Delete
                 </button>
               </div>
             </div>
           )}
         </div>
-        {sharedLinksModal}
-        {exportDataModal}
       </Modal>
-    )
-  );
+    );
+  }
+  if (isSharedLinksModalOpen) {
+    return (
+      <SharedLinksModal
+        onClose={() => {
+          setIsSharedLinksModalOpen(false), setShowSettingsModal(true);
+        }}
+      />
+    );
+  }
+
+  if (isExportDataModalOpen) {
+    return (
+      <ExportDataModal
+        onClose={() => {
+          setIsExportDataModalOpen(false), setShowSettingsModal(true);
+        }}
+      />
+    );
+  }
+
+  if (isDeleteAccountModalOpen) {
+    return (
+      <DeleteDataModal
+        onClose={() => {
+          setIsDeleteAccountModalOpen(false), setShowSettingsModal(true);
+        }}
+      />
+    );
+  }
 }

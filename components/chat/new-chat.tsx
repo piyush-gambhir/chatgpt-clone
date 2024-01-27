@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 import OpenAIIconLogo from "@/components/ui/openai-icon-logo";
 import ChatHeader from "@/components/chat/chat-header";
@@ -9,6 +9,26 @@ import ChatInputBox from "@/components/chat/chat-input-box";
 import Chat from "@/components/chat/chat";
 
 import { createUserConversation } from "@/data/user-conversations";
+import { Prompt } from "next/font/google";
+
+const actionButtons = [
+  {
+    title: "Give me ideas",
+    description: "about how to plan my New Year's resolutions",
+  },
+  {
+    title: "Help me pick",
+    description: "a gift for my dad who loves fishing",
+  },
+  {
+    title: "Tell me a fun fact",
+    description: "about the Roman Empire",
+  },
+  {
+    title: "Write a text",
+    description: "inviting my neighbors to a barbecue",
+  },
+];
 
 export default function NewChat() {
   const [prompt, setPrompt] = useState("");
@@ -16,7 +36,7 @@ export default function NewChat() {
   const [error, setError] = useState(false);
   const [isNewChat, setIsNewChat] = useState(true);
   const [conversationId, setConversationId] = useState("");
-  const onPromptSubmit = async () => {
+  const onPromptSubmit = async (prompt: string) => {
     try {
       setLoading(true);
       const response = await createUserConversation(prompt);
@@ -28,6 +48,17 @@ export default function NewChat() {
       setLoading(false);
     }
   };
+
+  const onActionButtonClick = useCallback(async (prompt: string) => {
+    try {
+      setPrompt(prompt);
+      await onPromptSubmit(prompt);
+    } catch (error) {
+      console.error("Something went wrong:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   return isNewChat ? (
     <main className="h-full w-full flex flex-col px-6">
@@ -43,22 +74,14 @@ export default function NewChat() {
         </div>
         <div className="md:mx-4 lg:mx-auto lg:max-w-2xl xl:max-w-3xl w-full flex flex-col items-center">
           <div className="w-full grid md:grid-flow-row grid-cols-1 md:grid-cols-2  gap-2 mb-4 px-1 pb-1 sm:px-2 sm:pb-0">
-            <ActionButton
-              title="Give me ideas"
-              description="about how to plan my New Year's resolutions"
-            />
-            <ActionButton
-              title="Help me pick"
-              description="a gift for my dad who loves fishing"
-            />
-            <ActionButton
-              title="Tell me a fun fact"
-              description="about the Roman Empire"
-            />
-            <ActionButton
-              title="Write a text"
-              description="inviting my neighbors to a barbecue"
-            />
+            {actionButtons.map((actionButton) => (
+              <ActionButton
+                key={actionButton.title}
+                title={actionButton.title}
+                description={actionButton.description}
+                onClick={() => onActionButtonClick(actionButton.description)}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -66,7 +89,7 @@ export default function NewChat() {
         <ChatInputBox
           prompt={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          onSubmit={onPromptSubmit}
+          onSubmit={() => onPromptSubmit(prompt)}
           isDisabled={prompt.length === 0 || loading || error}
         />
         <div className="px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">

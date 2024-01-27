@@ -18,6 +18,9 @@ export const getUserConversations = async () => {
   const user = await currentUser();
   try {
     const conversations = await db.conversation.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         userId: user?.id,
       },
@@ -34,6 +37,40 @@ export async function deleteUserConversations() {
     await db.conversation.deleteMany({
       where: {
         userId: user?.id,
+      },
+    });
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
+export async function deleteUserConversation(conversationId: string) {
+  try {
+    await db.conversation.delete({
+      where: {
+        id: conversationId,
+      },
+    });
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
+export async function updateUserConversationTitle(
+  conversationId: string,
+  title: string
+) {
+  try {
+    await db.conversation.update({
+      where: {
+        id: conversationId,
+      },
+      data: {
+        title,
       },
     });
     return true;

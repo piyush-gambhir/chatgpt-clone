@@ -9,16 +9,17 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  email         String?        @unique
-  name          String?
-  image         String?
-  emailVerified DateTime?
-  isPlusUser    Boolean        @default(false)
-  password      String?
-  conversations Conversation[]
-  accounts      Account[]
-  createdAt     DateTime       @default(now())
+  id                 String               @id @default(cuid())
+  email              String?              @unique
+  name               String?
+  image              String?
+  emailVerified      DateTime?
+  isPlusUser         Boolean              @default(false)
+  password           String?
+  conversations      Conversation[]
+  accounts           Account[]
+  createdAt          DateTime             @default(now())
+  SharedConversation SharedConversation[]
 }
 
 model Account {
@@ -59,14 +60,15 @@ model PasswordResetToken {
 }
 
 model Conversation {
-  id         String    @id @default(cuid())
-  title      String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  isArchived Boolean   @default(false)
-  messages   Message[]
-  User       User?     @relation(fields: [userId], references: [id])
-  userId     String?
+  id                 String               @id @default(cuid())
+  title              String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  isArchived         Boolean              @default(false)
+  messages           Message[]
+  User               User?                @relation(fields: [userId], references: [id])
+  userId             String
+  SharedConversation SharedConversation[]
 }
 
 model Message {
@@ -77,4 +79,15 @@ model Message {
   data           String
   Conversation   Conversation? @relation(fields: [conversationId], references: [id])
   conversationId String?
+}
+
+model SharedConversation {
+  id             String       @id @default(cuid())
+  title          String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  conversationId String
+  User           User         @relation(fields: [userId], references: [id])
+  userId         String
+  Conversation   Conversation @relation(fields: [conversationId], references: [id])
 }
