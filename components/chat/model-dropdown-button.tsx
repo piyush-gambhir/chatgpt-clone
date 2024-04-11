@@ -5,10 +5,18 @@ import { useState, useRef } from "react";
 
 import { useClickOutside } from "@/hooks/use-click-outside";
 
+import { usePricingModalStore } from "@/stores/modal-store";
+
 import CustomIcon from "@/components/ui/custom-icons";
 export default function ModelDropdownButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentModel, setCurrentModel] = useState("GPT-3.5");
+
+  const {
+    isOpen: pricingIsOpen,
+    openModal: openPricingModal,
+    closeModal: closePricingModal,
+  } = usePricingModalStore();
 
   const dropdownRef = useRef(null);
 
@@ -17,8 +25,10 @@ export default function ModelDropdownButton() {
     handler: () => setIsDropdownOpen(false),
   });
 
+  const isPlusUser = false;
+
   return (
-    <div className="">  
+    <div className="">
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className={cn(
@@ -79,8 +89,9 @@ export default function ModelDropdownButton() {
           </button>
           <button
             onClick={() => {
-              setCurrentModel("GPT-4");
-              setIsDropdownOpen(false);
+              openPricingModal();
+              // setCurrentModel("GPT-4");
+              // setIsDropdownOpen(false);
             }}
             className="group m-1.5 p-2.5 text-sm flex flex-row justify-between items-center rounded-md border-2 border-transparent hover:bg-black/5 dark:hover:bg-[#2b2c2e] hover:border-black dark:hover:border-[#2b2c2e] hover:dark:border-white"
           >

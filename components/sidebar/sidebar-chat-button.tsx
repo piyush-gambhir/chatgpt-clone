@@ -19,6 +19,8 @@ export default function SidebarChatButton({ id, title, active }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDeleteConversationModalOpen, setIsDeleteConversationModalOpen] =
     useState(false);
+
+ 
   const router = useRouter();
 
   const dropdownRef = useRef(null);

@@ -10,7 +10,7 @@ import MessageSkeleton from "@/components/chat/message-skeleton";
 import { getConversationMessages } from "@/data/conversation-messages";
 import { createConversationMessage } from "@/data/conversation-messages";
 
-import dialoGPT from "@/lib/dialoGPT-medium";
+import gemma from "@/lib/dialoGPT-medium";
 
 import { Message } from "@/lib/types";
 
@@ -52,7 +52,7 @@ export default function Chat({ conversationId, newChatPrompt }: Props) {
       };
       setMessages((prev) => [...prev, message]);
       setLoading(true);
-      const modelResponse = await dialoGPT({
+      const modelResponse = await gemma({
         inputs: {
           past_user_inputs: [
             ...messages.filter((m) => m.isUser).map((m) => m.data),

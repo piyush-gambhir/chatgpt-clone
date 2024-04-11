@@ -7,6 +7,8 @@ import Button from "@/components/sidebar/settings-modal-button";
 
 import { deleteUserConversation } from "@/data/user-conversations";
 
+import { useConversationStore } from "@/stores/conversation-store";
+
 type Props = {
   conversationId: string;
   conversationTitle: string;
@@ -18,6 +20,7 @@ export default function DeleteConversationConfirmationModal({
   conversationTitle,
   onClose,
 }: Props) {
+  const { deleteConversation } = useConversationStore();
   const router = useRouter();
 
   return (
@@ -40,6 +43,7 @@ export default function DeleteConversationConfirmationModal({
             className="text-white bg-red-700"
             onClick={() => {
               router.push("/");
+              deleteConversation(conversationId);
               deleteUserConversation(conversationId);
               onClose();
             }}

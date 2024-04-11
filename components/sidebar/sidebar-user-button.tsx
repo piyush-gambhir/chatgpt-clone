@@ -12,18 +12,24 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { logout } from "@/actions/logout";
 
+import { useSettingsModalStore } from "@/stores/modal-store";
+
 type Props = {};
 
 export default function SidebarUserButton({}: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const {
+    isOpen: settingsIsOpen,
+    openModal: openSettingsModal,
+    closeModal: closeSettingsModal,
+  } = useSettingsModalStore();
 
   useEffect(() => {
     const currentURL = window.location.href;
     if (currentURL.includes("#settings")) {
-      setIsSettingsModalOpen(true);
+      openSettingsModal();
     }
-  }, []);
+  }, [openSettingsModal]);
 
   const dropdownRef = useRef(null);
   useClickOutside({
@@ -38,11 +44,11 @@ export default function SidebarUserButton({}: Props) {
 
   return (
     <div className="relative ">
-      {isSettingsModalOpen && (
+      {settingsIsOpen && (
         <SettingsModal
           onClose={() => {
             router.push(pathname);
-            setIsSettingsModalOpen(false);
+            closeSettingsModal();
           }}
         />
       )}
@@ -59,7 +65,7 @@ export default function SidebarUserButton({}: Props) {
             <button
               onClick={() => {
                 setIsDropdownOpen(false);
-                setIsSettingsModalOpen(true);
+                openSettingsModal();
                 router.push(`${pathname}#settings`);
               }}
               className="flex flex-row gap-3 items-center min-h-[44px] px-3 py-1 hover:bg-[#343541] transition-colors"

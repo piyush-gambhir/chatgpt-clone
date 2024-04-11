@@ -1,7 +1,7 @@
 "use client";
 
 import cn from "clsx";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import NewChatButton from "@/components/sidebar/new-chat-button";
@@ -12,24 +12,30 @@ import PricingModal from "@/components/modals/pricing-modal";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
 
+import { usePricingModalStore } from "@/stores/modal-store";
+
 type Props = {
   className?: string;
 };
 
 export default function Sidebar({ className }: Props) {
-  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const {
+    isOpen: pricingIsOpen,
+    openModal: openPricingModal,
+    closeModal: closePricingModal,
+  } = usePricingModalStore();
+
 
   const user = useCurrentUser();
-
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     const currentURL = window.location.href;
     if (currentURL.includes("#pricing")) {
-      setIsPricingModalOpen(true);
+      openPricingModal();
     }
-  }, []);
+  }, [openPricingModal]);
 
   return (
     <div
@@ -52,7 +58,7 @@ export default function Sidebar({ className }: Props) {
         {!user?.isPlusUser && (
           <button
             onClick={() => {
-              setIsPricingModalOpen(true);
+              openPricingModal();
               router.push(`${pathname}#pricing`);
             }}
             className="flex min-h-[44px] py-1 items-center gap-3 rounded-lg px-2 text-sm hover:bg-[#202123]"
@@ -69,11 +75,11 @@ export default function Sidebar({ className }: Props) {
         )}
         <SidebarUserButton />
       </div>
-      {isPricingModalOpen && (
+      {pricingIsOpen && (
         <PricingModal
           onClose={() => {
             router.push(pathname);
-            setIsPricingModalOpen(false);
+            closePricingModal();
           }}
         />
       )}

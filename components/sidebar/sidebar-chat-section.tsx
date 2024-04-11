@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useCallback, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -10,12 +9,16 @@ import SidebarChatButton from "@/components/sidebar/sidebar-chat-button";
 
 import { getUserConversations } from "@/data/user-conversations";
 
+import { useConversationStore } from "@/stores/conversation-store";
+
+
 type Props = {};
 
 export default function SidebarChatSection({}: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [conversations, setConversations] = useState<Conversation[]>([]);
+
+  const { conversations, setConversations } = useConversationStore();
 
   const fetchConversations = useCallback(async () => {
     try {
@@ -46,8 +49,6 @@ export default function SidebarChatSection({}: Props) {
 
     conversations.forEach((conversation) => {
       const updatedAt = new Date(conversation.updatedAt);
-
-      // Grouping logic based on date
       if (updatedAt.toDateString() === today.toDateString()) {
         groupedConversations["Today"].push(conversation);
       } else if (updatedAt.toDateString() === sevenDaysAgo.toDateString()) {
@@ -98,6 +99,7 @@ export default function SidebarChatSection({}: Props) {
                     {group}
                   </h3>
                   <ol className="flex flex-col">
+                    
                     {groupedConversations[group].map((conversation) => (
                       <li key={conversation.id}>
                         <SidebarChatButton
