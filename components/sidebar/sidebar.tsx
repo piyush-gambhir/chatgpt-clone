@@ -11,8 +11,8 @@ import SidebarUserButton from "@/components/sidebar/sidebar-user-button";
 import PricingModal from "@/components/modals/pricing-modal";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { useModal } from "@/hooks/use-modal";
 
-import { usePricingModalStore } from "@/stores/modal-store";
 
 type Props = {
   className?: string;
@@ -23,7 +23,7 @@ export default function Sidebar({ className }: Props) {
     isOpen: pricingIsOpen,
     openModal: openPricingModal,
     closeModal: closePricingModal,
-  } = usePricingModalStore();
+  } = useModal();
 
 
   const user = useCurrentUser();

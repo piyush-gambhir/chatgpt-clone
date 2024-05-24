@@ -6,7 +6,7 @@ type Modal = {
   closeModal: () => void;
 };
 
-export default function useModal(): Modal {
+export  function useModal(): Modal {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = (): void => setIsOpen(true);
   const closeModal = (): void => setIsOpen(false);

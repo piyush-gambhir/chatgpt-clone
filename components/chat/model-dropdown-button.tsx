@@ -5,9 +5,8 @@ import { useState, useRef } from "react";
 
 import { useClickOutside } from "@/hooks/use-click-outside";
 
-import { usePricingModalStore } from "@/stores/modal-store";
-
 import CustomIcon from "@/components/ui/custom-icons";
+import { useModal } from "@/hooks/use-modal";
 export default function ModelDropdownButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentModel, setCurrentModel] = useState("GPT-3.5");
@@ -16,7 +15,7 @@ export default function ModelDropdownButton() {
     isOpen: pricingIsOpen,
     openModal: openPricingModal,
     closeModal: closePricingModal,
-  } = usePricingModalStore();
+  } = useModal();
 
   const dropdownRef = useRef(null);
 

@@ -8,11 +8,11 @@ import CustomIcon from "@/components/ui/custom-icons";
 import SettingsModal from "@/components/modals/settings-modal";
 
 import { useClickOutside } from "@/hooks/use-click-outside";
+import { useModal } from "@/hooks/use-modal";
+
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { logout } from "@/actions/logout";
-
-import { useSettingsModalStore } from "@/stores/modal-store";
 
 type Props = {};
 
@@ -22,7 +22,7 @@ export default function SidebarUserButton({}: Props) {
     isOpen: settingsIsOpen,
     openModal: openSettingsModal,
     closeModal: closeSettingsModal,
-  } = useSettingsModalStore();
+  } = useModal();
 
   useEffect(() => {
     const currentURL = window.location.href;
