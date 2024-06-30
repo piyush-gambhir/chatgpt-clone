@@ -7,23 +7,29 @@ import ChatInputBox from "@/components/chat/chat-input-box";
 import ChatMessage from "@/components/chat/chat-message";
 import MessageSkeleton from "@/components/chat/message-skeleton";
 
-import { getConversationMessages } from "@/data/conversation-messages";
 import { createConversationMessage } from "@/data/conversation-messages";
 
-import gemma from "@/lib/dialoGPT-medium";
+import { dialoGPT } from "@/lib/dialoGPT-medium";
 
 import { Message } from "@/lib/types";
 
 type Props = {
   conversationId: string;
+  conversationMessages: Message[];
   newChatPrompt?: string;
 };
 
-export default function Chat({ conversationId, newChatPrompt }: Props) {
+export default function Chat({
+  conversationId,
+  conversationMessages,
+  newChatPrompt,
+}: Props) {
   const [prompt, setPrompt] = useState(newChatPrompt || "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(
+    conversationMessages || []
+  );
   const [isNewChat, setIsNewChat] = useState(newChatPrompt ? true : false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -52,7 +58,7 @@ export default function Chat({ conversationId, newChatPrompt }: Props) {
       };
       setMessages((prev) => [...prev, message]);
       setLoading(true);
-      const modelResponse = await gemma({
+      const modelResponse = await dialoGPT({
         inputs: {
           past_user_inputs: [
             ...messages.filter((m) => m.isUser).map((m) => m.data),
@@ -84,26 +90,6 @@ export default function Chat({ conversationId, newChatPrompt }: Props) {
       setLoading(false);
     }
   }, [conversationId, messages, prompt]);
-
-  const fetchMessages = useCallback(async () => {
-    try {
-      if (isNewChat) {
-        onPromptSubmit();
-        setIsNewChat(false);
-      } else {
-        const response = (await getConversationMessages(
-          conversationId
-        )) as Message[];
-        setMessages((prev) => [...prev, ...response]);
-      }
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchMessages();
-  }, []);
 
   return (
     <main className="h-full w-full flex flex-col px-6">

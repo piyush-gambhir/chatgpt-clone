@@ -7,7 +7,7 @@ import { getUserByEmail } from "@/data/user";
 
 import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_PAGE } from "@/routes";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
@@ -31,7 +31,7 @@ export const login = async (
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+      redirectTo: callbackUrl || DEFAULT_PAGE,
     });
     return { success: "Success" };
   } catch (error) {

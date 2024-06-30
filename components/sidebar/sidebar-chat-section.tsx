@@ -8,11 +8,13 @@ import { Conversation } from "@/lib/types";
 import SidebarChatButton from "@/components/sidebar/sidebar-chat-button";
 
 import { getUserConversations } from "@/data/user-conversations";
-
+import { useAppContext } from "@/context/context";
 
 type Props = {};
 
 export default function SidebarChatSection({}: Props) {
+  const { chats, setChats } = useAppContext();
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -96,7 +98,6 @@ export default function SidebarChatSection({}: Props) {
                     {group}
                   </h3>
                   <ol className="flex flex-col">
-                    
                     {groupedConversations[group].map((conversation) => (
                       <li key={conversation.id}>
                         <SidebarChatButton

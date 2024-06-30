@@ -13,7 +13,6 @@ import PricingModal from "@/components/modals/pricing-modal";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useModal } from "@/hooks/use-modal";
 
-
 type Props = {
   className?: string;
 };
@@ -24,7 +23,6 @@ export default function Sidebar({ className }: Props) {
     openModal: openPricingModal,
     closeModal: closePricingModal,
   } = useModal();
-
 
   const user = useCurrentUser();
   const router = useRouter();

@@ -1,10 +1,22 @@
+import React from "react";
+
 import Chat from "@/components/chat/chat";
-export default function Page({
+
+import { getConversationMessages } from "@/data/conversation-messages";
+
+export default async function Page({
   params,
 }: {
   params: { conversationId: string };
 }) {
   const conversationId = params.conversationId;
 
-  return <Chat conversationId={conversationId} />;
+  const conversationMessages = await getConversationMessages(conversationId);
+
+  return (
+    <Chat
+      conversationId={conversationId}
+      conversationMessages={conversationMessages}
+    />
+  );
 }
